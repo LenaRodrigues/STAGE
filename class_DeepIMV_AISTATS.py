@@ -1,7 +1,8 @@
 import tensorflow as tf
 import numpy as np
+import tf_slim as slim
+from tf_slim.layers import fully_connected as FC_Net
 
-from tensorflow.contrib.layers import fully_connected as FC_Net
 
 
 _EPSILON = 1e-8
