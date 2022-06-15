@@ -163,14 +163,14 @@ class DeepIMV_AISTATS:
             ### INPUT/OUTPUT                   
             self.x_set          = {}
             for m in range(self.M):
-                self.x_set[m]   = tf.placeholder(tf.float32, [None, self.x_dim_set[m]], 'input_{}'.format(m))
+                self.x_set[m]   = tf.Variable(tf.float32, [None, self.x_dim_set[m]], 'input_{}'.format(m))
             
-            self.mask           = tf.placeholder(tf.float32, [None, self.M], name='mask')            
-            self.y              = tf.placeholder(tf.float32, [None, self.y_dim],  name='output')
+            self.mask           = tf.Variable(tf.float32, [None, self.M], name='mask')            
+            self.y              = tf.Variable(tf.float32, [None, self.y_dim],  name='output')
                                    
             ### BALANCING COEFFICIENTS
-            self.alpha          = tf.placeholder(tf.float32, name='coef_alpha') #Consitency Loss
-            self.beta           = tf.placeholder(tf.float32, name='coef_beta')  #Information Bottleneck
+            self.alpha          = tf.Variable(tf.float32, name='coef_alpha') #Consitency Loss
+            self.beta           = tf.Variable(tf.float32, name='coef_beta')  #Information Bottleneck
             
             if self.reg_scale == 0:
                 w_reg           = None
