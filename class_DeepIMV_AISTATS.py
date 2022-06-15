@@ -155,7 +155,7 @@ class DeepIMV_AISTATS:
         ds     = tf.compat.v1.distributions.Normal
         
 #         with tf.name_scope(self.name):
-        with tf.variable_scope(self.name):
+        with tf.compat.v1.variable_scope(self.name):
             self.mb_size        = tf.placeholder(tf.int32, [], name='batch_size')
             self.lr_rate        = tf.placeholder(tf.float32, name='learning_rate')           
             self.k_prob         = tf.placeholder(tf.float32, name='keep_probability')
