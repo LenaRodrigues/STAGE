@@ -154,23 +154,23 @@ class DeepIMV_AISTATS:
     def _build_net(self):
         ds     = tf.compat.v1.distributions.Normal
         
-#         with tf.name_scope(self.name):
+#         with tf.name_scope(self.name):  
         with tf.compat.v1.variable_scope(self.name):
-            self.mb_size        = tf.Variable(tf.int32, [], name='batch_size')
-            self.lr_rate        = tf.Variable(tf.float32, name='learning_rate')           
-            self.k_prob         = tf.Variable(tf.float32, name='keep_probability')
+            self.mb_size        = tf.Variable(dtype=tf.int32, [], name='batch_size')
+            self.lr_rate        = tf.Variable(dtype=tf.float32, name='learning_rate')           
+            self.k_prob         = tf.Variable(dtype=tf.float32, name='keep_probability')
                        
             ### INPUT/OUTPUT                   
             self.x_set          = {}
             for m in range(self.M):
-                self.x_set[m]   = tf.Variable(tf.float32, [None, self.x_dim_set[m]], 'input_{}'.format(m))
+                self.x_set[m]   = tf.Variable(dtype=tf.float32, [None, self.x_dim_set[m]], 'input_{}'.format(m))
             
-            self.mask           = tf.Variable(tf.float32, [None, self.M], name='mask')            
-            self.y              = tf.Variable(tf.float32, [None, self.y_dim],  name='output')
+            self.mask           = tf.Variable(dtype=tf.float32, [None, self.M], name='mask')            
+            self.y              = tf.Variable(dtype=tf.float32, [None, self.y_dim],  name='output')
                                    
             ### BALANCING COEFFICIENTS
-            self.alpha          = tf.Variable(tf.float32, name='coef_alpha') #Consitency Loss
-            self.beta           = tf.Variable(tf.float32, name='coef_beta')  #Information Bottleneck
+            self.alpha          = tf.Variable(dtype=tf.float32, name='coef_alpha') #Consitency Loss
+            self.beta           = tf.Variable(dtype=tf.float32, name='coef_beta')  #Information Bottleneck
             
             if self.reg_scale == 0:
                 w_reg           = None
