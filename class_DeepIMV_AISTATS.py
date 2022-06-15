@@ -152,7 +152,7 @@ class DeepIMV_AISTATS:
         
        
     def _build_net(self):
-        ds     = tf.contrib.distributions
+        ds     = tf.compat.v1.estimator.distributions
         
 #         with tf.name_scope(self.name):
         with tf.variable_scope(self.name):
@@ -175,7 +175,7 @@ class DeepIMV_AISTATS:
             if self.reg_scale == 0:
                 w_reg           = None
             else:
-                w_reg           = tf.contrib.layers.l1_regularizer(scale=self.reg_scale)
+                w_reg           = tf.compat.v1.estimator.layers.l1_regularizer(scale=self.reg_scale)
                         
             ### PRIOR
             prior_z  = ds.Normal(0.0, 1.0) #PoE Prior - q(z)
@@ -286,7 +286,7 @@ class DeepIMV_AISTATS:
                                     + tf.losses.get_regularization_loss()
     
             
-            self.global_step      = tf.contrib.framework.get_or_create_global_step()
+            self.global_step      = tf.compat.v1.estimator.framework.get_or_create_global_step()
             self.lr_rate_decayed  = tf.train.exponential_decay(self.lr_rate, self.global_step,
                                                        decay_steps=2*self.steps_per_batch,
                                                        decay_rate=0.97, staircase=True)
@@ -298,7 +298,7 @@ class DeepIMV_AISTATS:
             ma_update = ma.apply(tf.model_variables())
             
 
-            self.solver = tf.contrib.training.create_train_op(self.LOSS_TOTAL, opt,
+            self.solver = tf.compat.v1.estimator.training.create_train_op(self.LOSS_TOTAL, opt,
                                                                self.global_step,
                                                                update_ops=[ma_update])
                 
