@@ -6,7 +6,7 @@ import tensorflow as tf
 
 import random
 import sys, os
-
+from tensorflow.python.framework import ops
 from sklearn.model_selection import train_test_split
 
 import import_data as impt
@@ -118,7 +118,7 @@ if __name__ == '__main__':
         os.makedirs(save_path)
 
 
-    tf.reset_default_graph()
+    ops.reset_default_graph()
     gpu_options = tf.GPUOptions()
     
     sess  = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
