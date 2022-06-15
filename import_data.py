@@ -6,7 +6,7 @@ import random
 
 ## all samples MUST include at least one view.
 def import_incomplete_handwritten():
-    npz = np.load('./data/Handwritten_Missing/data_with_missingviews.npz', allow_pickle=True)
+    npz = np.load('data_with_missingviews.npz', allow_pickle=True)
 
     X_set    = npz['X_set'].tolist()
     Y_onehot = npz['Y_onehot']
