@@ -152,7 +152,7 @@ class DeepIMV_AISTATS:
         
        
     def _build_net(self):
-        ds     =tf.compat.v1.distributions()
+        ds     = tf.compat.v1.distributions.Normal
         
 #         with tf.name_scope(self.name):
         with tf.variable_scope(self.name):
