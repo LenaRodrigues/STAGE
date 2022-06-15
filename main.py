@@ -119,7 +119,7 @@ if __name__ == '__main__':
 
 
     ops.reset_default_graph()
-    gpu_options = tf.GPUOptions()
+    gpu_options = tf.compat.v1.GPUOptions(per_process_gpu_memory_fraction=0.333)
     
     sess  = tf.Session(config=tf.ConfigProto(gpu_options=gpu_options))
     model = DeepIMV_AISTATS(sess, "DeepIMV_AISTATS", input_dims, network_settings)
