@@ -64,7 +64,7 @@ for tumor in tumor_list:
             final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
             sup_feat_list  += feat_list[tumor]
             
-sup_feat_list = np.unique(sup_feat_list).tolist()
+sup_feat_list1 = np.unique(sup_feat_list).tolist()
             
 
 for tumor in tumor_list:
