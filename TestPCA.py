@@ -42,7 +42,7 @@ tumor_list = [
 'UCS',
 'UVM']
 ## 1. FIND SUPERSET OF RPPA FEATURES
-feat_list = []
+feat_list = {}
 for tumor in tumor_list:
     filepath = './home/lrodrigues/STAGE/DATA RPPA/gdac.broadinstitute.org_{}.RPPA_AnnotateWithGene.Level_3.2016012800.0.0/'.format(tumor)
     filename = '{}.rppa.txt'.format(tumor)
