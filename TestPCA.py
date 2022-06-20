@@ -89,8 +89,8 @@ for tumor in tumor_list:
             final_df = pd.concat([final_df, tmp_], axis=0)
     
 final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
-final_df.to_csv('./FINAL/RPPA.csv', index=False)
-RPPA        = pd.read_csv('./FINAL/RPPA.csv')
+final_df.to_csv('/home/lrodrigues/STAGE/datarppa/.csv', index=False)
+RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/.csv')
 RPPA        = RPPA.rename(columns={'Composite.Element.REF':'Hybridization REF'})
 RPPA['Hybridization REF'] = RPPA['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 RPPA         = RPPA.drop_duplicates(subset=['Hybridization REF'])
