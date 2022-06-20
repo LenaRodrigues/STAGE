@@ -63,6 +63,8 @@ for tumor in tumor_list:
         else:
             final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
             sup_feat_list  += feat_list[tumor]
+    else: 
+        print("erreur fichier")
 sup_feat_list1 = np.unique(sup_feat_list).tolist()
             
 
