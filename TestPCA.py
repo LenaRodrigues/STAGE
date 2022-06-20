@@ -79,7 +79,6 @@ for tumor in tumor_list:
         tmp         = tmp.iloc[1:, :].reset_index(drop=True)
         
         tmp_ = pd.DataFrame([], columns=['Composite.Element.REF'] + sup_feat_list)
-        print(length(['Composite.Element.REF']), length(feat_list[tumor])
         tmp_[['Composite.Element.REF'] + feat_list[tumor]] = tmp[['Composite.Element.REF'] + feat_list[tumor]]
         
         if tumor == 'ACC':
