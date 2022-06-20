@@ -44,7 +44,7 @@ tumor_list = [
 ## 1. FIND SUPERSET OF RPPA FEATURES
 feat_list = {}
 for tumor in tumor_list:
-    filepath = './home/lrodrigues/STAGE/DATA RPPA/gdac.broadinstitute.org_{}.RPPA_AnnotateWithGene.Level_3.2016012800.0.0.tar.gz/'.format(tumor)
+    filepath = './home/lrodrigues/STAGE/datarppa/'.format(tumor)
     filename = '{}.rppa.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
@@ -69,7 +69,7 @@ sup_feat_list1 = np.unique(sup_feat_list).tolist()
             
 
 for tumor in tumor_list:
-    filepath = './home/lrodrigues/STAGE/DATA RPPA/gdac.broadinstitute.org_{}.RPPA_AnnotateWithGene.Level_3.2016012800.0.0/'.format(tumor)
+    filepath = './home/lrodrigues/STAGE/datarppa/'.format(tumor)
     filename = '{}.rppa.txt'.format(tumor)
     
     if os.path.exists(filepath + filename):
