@@ -89,13 +89,67 @@ for tumor in tumor_list:
             final_df = pd.concat([final_df, tmp_], axis=0)
     
 final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
-final_df.to_csv('/home/lrodrigues/STAGE/datarppa/.csv', index=False)
-RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/.csv')
+final_df.to_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv', index=False)
+
+## 2. FIND SUPERSET OF CLINICAL FEATURES
+
+feat_list = {}
+for tumor in tumor_list:
+    filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
+    filename = '{}.clin.merged.picked.txt'.format(tumor)
+
+    if os.path.exists(filepath + filename):
+        tmp = pd.read_csv(filepath + filename, sep='\t')
+
+        tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
+        tmp         = tmp.T.reset_index()
+        tmp.columns = tmp.iloc[0, 0:]
+        tmp         = tmp.iloc[1:, :].reset_index(drop=True)
+        
+        feat_list[tumor] = list(tmp)[1:]
+        
+        if tumor == 'ACC':
+            final_feat_list = feat_list[tumor].copy()
+            sup_feat_list   = feat_list[tumor].copy()
+        else:
+            final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
+            sup_feat_list  += feat_list[tumor]
+sup_feat_list = np.unique(sup_feat_list).tolist()
+            
+
+for tumor in tumor_list:
+    filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
+    filename = '{}.clin.merged.picked.txt'.format(tumor)
+    
+    if os.path.exists(filepath + filename):
+        tmp = pd.read_csv(filepath + filename, sep='\t')
+
+        tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
+        tmp         = tmp.T.reset_index()
+        tmp.columns = tmp.iloc[0, 0:]
+        tmp         = tmp.iloc[1:, :].reset_index(drop=True)
+        
+        tmp_ = pd.DataFrame([], columns=['Composite.Element.REF'] + sup_feat_list)
+        tmp_[['Composite.Element.REF'] + feat_list[tumor]] = tmp[['Composite.Element.REF'] + feat_list[tumor]]
+        
+        if tumor == 'ACC':
+#             final_df = tmp[['gene'] + final_feat_list.tolist()]
+            final_df = tmp_
+        else:
+#             final_df = pd.concat([final_df, tmp[['gene'] + final_feat_list.tolist()]], axis=0)
+            final_df = pd.concat([final_df, tmp_], axis=0)
+final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
+final_df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
+   
+RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv')
 RPPA        = RPPA.rename(columns={'Composite.Element.REF':'Hybridization REF'})
 RPPA['Hybridization REF'] = RPPA['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 RPPA         = RPPA.drop_duplicates(subset=['Hybridization REF'])
 tmp_list = np.asarray(list(RPPA))
 RPPA     = RPPA[tmp_list[RPPA.isna().sum(axis=0) == 0]]
+label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1)
+label = label.sort_values(by='Hybridization REF').reset_index(drop=True)
+label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
 
 '''
     Some of the patients had shifted columns for some reason.
