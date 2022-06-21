@@ -148,6 +148,7 @@ RPPA         = RPPA.drop_duplicates(subset=['Hybridization REF'])
 tmp_list = np.asarray(list(RPPA))
 RPPA     = RPPA[tmp_list[RPPA.isna().sum(axis=0) == 0]]
 label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1)
+print(label.columns.tolist())
 label = label.sort_values(by='Composite.Element.REF').reset_index(drop=True)
 label = label[label['Composite.Element.REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Composite.Element.REF'], keep ='last').reset_index(drop=True)
 
