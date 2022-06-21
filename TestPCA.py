@@ -96,9 +96,7 @@ RPPA['Hybridization REF'] = RPPA['Hybridization REF'].apply(lambda x: x.lower()[
 RPPA         = RPPA.drop_duplicates(subset=['Hybridization REF'])
 tmp_list = np.asarray(list(RPPA))
 RPPA     = RPPA[tmp_list[RPPA.isna().sum(axis=0) == 0]]
-label = pd.read_csv('./FINAL/clinical_label.csv', header=1)
-label = label.sort_values(by='Hybridization REF').reset_index(drop=True)
-label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
+
 '''
     Some of the patients had shifted columns for some reason.
     Manually corrected these errors.
