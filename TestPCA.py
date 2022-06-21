@@ -129,8 +129,8 @@ for tumor in tumor_list:
         tmp.columns = tmp.iloc[0, 0:]
         tmp         = tmp.iloc[1:, :].reset_index(drop=True)
         
-        tmp_ = pd.DataFrame([], columns=['Composite.Element.REF'] + sup_feat_list)
-        tmp_[['Composite.Element.REF'] + feat_list[tumor]] = tmp[['Composite.Element.REF'] + feat_list[tumor]]
+        tmp_ = pd.DataFrame([], columns=['Hybridization REF'] + sup_feat_list)
+        tmp_[['Hybridization REF'] + feat_list[tumor]] = tmp[['Hybridization REF'] + feat_list[tumor]]
         
         if tumor == 'ACC':
 #             final_df = tmp[['gene'] + final_feat_list.tolist()]
@@ -138,7 +138,7 @@ for tumor in tumor_list:
         else:
 #             final_df = pd.concat([final_df, tmp[['gene'] + final_feat_list.tolist()]], axis=0)
             final_df = pd.concat([final_df, tmp_], axis=0)
-final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
+final_df = final_df.drop_duplicates(subset=['Hybridization REF']).reset_index(drop=True)
 final_df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
    
 RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv')
