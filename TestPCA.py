@@ -89,7 +89,7 @@ for tumor in tumor_list:
             final_df = pd.concat([final_df, tmp_], axis=0)
     
 final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
-print(final_df.columns.tolist())
+print("1 :", final_df.columns.tolist())
 final_df.to_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv', index=False)
 
 ## 2. FIND SUPERSET OF CLINICAL FEATURES
@@ -139,7 +139,7 @@ for tumor in tumor_list:
         else:
 #             final_df = pd.concat([final_df, tmp[['gene'] + final_feat_list.tolist()]], axis=0)
             final_df = pd.concat([final_df, tmp_], axis=0)
-print(final_df.columns.tolist())
+print("2:", final_df.columns.tolist())
 final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
 final_df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
 
