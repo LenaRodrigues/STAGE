@@ -384,7 +384,6 @@ df_pca3  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
 view = 'RPPA'
 df_pca4  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
 
-CREATE 1-Yr Mortality Dataset. (Censored samples are removed...)
 
 idx_list_y = label.loc[label['1yr-mortality'] != -1, 'Hybridization REF']
 
