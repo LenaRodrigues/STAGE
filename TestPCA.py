@@ -89,7 +89,7 @@ for tumor in tumor_list:
             final_df = pd.concat([final_df, tmp_], axis=0)
     
 final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
-print("1 :", final_df.columns.tolist())
+
 final_df.to_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv', index=False)
 
 ## 2. FIND SUPERSET OF CLINICAL FEATURES
@@ -101,7 +101,7 @@ for tumor in tumor_list:
 
     if os.path.exists(filepath + filename):
         tmp = pd.read_csv(filepath + filename, sep='\t')
-        print(tmp.columns.tolist())
+        
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
         tmp.columns = tmp.iloc[0, 0:]
@@ -116,7 +116,7 @@ for tumor in tumor_list:
             final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
             sup_feat_list  += feat_list[tumor]
 sup_feat_list = np.unique(sup_feat_list).tolist()
-            
+print(sup_feat_list.columns.tolist())
 
 for tumor in tumor_list:
     filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
@@ -139,9 +139,9 @@ for tumor in tumor_list:
         else:
 #             final_df = pd.concat([final_df, tmp[['gene'] + final_feat_list.tolist()]], axis=0)
             final_df = pd.concat([final_df, tmp_], axis=0)
-print("2:", final_df.columns.tolist())
+
 final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
-print("3:", final_df.columns.tolist())
+
 final_df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
 
 RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv')
