@@ -198,8 +198,8 @@ final_df.to_csv('/home/lrodrigues/STAGE/DATAMethyl/finalmethyl.csv', index=False
 ## 1. FIND SUPERSET OF mRNASeq FEATURES
 feat_list = {}
 for tumor in tumor_list:
-    filepath = './miRNAseq/gdac.broadinstitute.org_{}.miRseq_Preprocess.Level_3.2016012800.0.0/'.format(tumor)
-    filename = '{}.miRseq_RPKM_log2.txt'.format(tumor)
+    filepath = '/home/lrodrigues/STAGE/DATAmRseq/'.format(tumor)
+    filename = '{}.uncv2.mRNAseq_RSEM_normalized_log2.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
         tmp = pd.read_csv(filepath + filename, sep='\t')
@@ -221,8 +221,8 @@ for tumor in tumor_list:
 sup_feat_list = np.unique(sup_feat_list).tolist()
 
 for tumor in tumor_list:
-    filepath = './miRNAseq/gdac.broadinstitute.org_{}.miRseq_Preprocess.Level_3.2016012800.0.0/'.format(tumor)
-    filename = '{}.miRseq_RPKM_log2.txt'.format(tumor)
+    filepath = '/home/lrodrigues/STAGE/DATAmRseq/'.format(tumor)
+    filename = '{}.uncv2.mRNAseq_RSEM_normalized_log2.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
         tmp = pd.read_csv(filepath + filename, sep='\t')
@@ -243,9 +243,9 @@ for tumor in tumor_list:
             final_df = pd.concat([final_df, tmp_], axis=0)
             
 final_df = final_df.drop_duplicates(subset=['gene']).reset_index(drop=True)
-final_df.to_csv('./FINAL/miRNAseq_RPKM_log2.csv', index=False)
+final_df.to_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv', index=False)
 
-mRNAseq     = pd.read_csv('./FINAL/mRNAseq_RSEM.csv')
+mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv')
 mRNAseq     = mRNAseq.drop_duplicates(subset=['HYBRIDIZATION R']).reset_index(drop=True)
 mRNAseq     = mRNAseq[mRNAseq['HYBRIDIZATION R'] != 'HYBRIDIZATION R'].reset_index(drop=True)
 mRNAseq     = mRNAseq.rename(columns={'HYBRIDIZATION R':'Hybridization REF'})
