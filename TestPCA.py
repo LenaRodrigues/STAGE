@@ -101,7 +101,7 @@ for tumor in tumor_list:
     if os.path.exists(filepath + filename):
         tmp = pd.read_csv(filepath + filename, sep='\t')
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
-        print(tmp.columns.tolist())
+        print(list(tmp)[0])
         tmp         = tmp.T.reset_index()
         tmp.columns = tmp.iloc[0, 0:]
         tmp         = tmp.iloc[1:, :].reset_index(drop=True)
@@ -113,7 +113,7 @@ for tumor in tumor_list:
             final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
             sup_feat_list  += feat_list[tumor]
 sup_feat_list = np.unique(sup_feat_list).tolist()
-print(sup_feat_list)
+
 for tumor in tumor_list:
     filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
     filename = '{}.clin.merged.picked.txt'.format(tumor)
