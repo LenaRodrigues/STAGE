@@ -116,7 +116,7 @@ for tumor in tumor_list:
             final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
             sup_feat_list  += feat_list[tumor]
 sup_feat_list = np.unique(sup_feat_list).tolist()
-print(sup_feat_list.columns.tolist())
+print(sup_feat_list)
 
 for tumor in tumor_list:
     filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
