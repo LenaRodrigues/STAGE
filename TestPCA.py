@@ -138,7 +138,8 @@ for tumor in tumor_list:
         else:
 #             final_df = pd.concat([final_df, tmp[['gene'] + final_feat_list.tolist()]], axis=0)
             final_df = pd.concat([final_df, tmp_], axis=0)
-final_df = final_df.drop_duplicates(subset=['Hybridization REF']).reset_index(drop=True)
+print(final_df.columns())
+final_df = final_df.drop_duplicates(subset=['Composite.Element.REF']).reset_index(drop=True)
 final_df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
 
 RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv')
