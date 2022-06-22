@@ -149,8 +149,8 @@ label = label[label['Composite.Element.REF'].apply(lambda x: 'tcga' in x)].drop_
     Manually corrected these errors.
 '''
 
-'''label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death']
-label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status']
+label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death']
+'''label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status']
 label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'years_to_birth']
 
 label.loc[label['days_to_last_followup'] == 'other  specify', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'other  specify', 'days_to_death']
