@@ -101,7 +101,7 @@ for tumor in tumor_list:
 
     if os.path.exists(filepath + filename):
         tmp = pd.read_csv(filepath + filename, sep='\t')
-
+        print(tmp.columns.tolist())
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
         tmp.columns = tmp.iloc[0, 0:]
@@ -124,7 +124,7 @@ for tumor in tumor_list:
     
     if os.path.exists(filepath + filename):
         tmp = pd.read_csv(filepath + filename, sep='\t')
-        print(tmp.columns.tolist())
+        
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
         tmp.columns = tmp.iloc[0, 0:]
