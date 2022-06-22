@@ -94,26 +94,26 @@ final_df.to_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv', index=False)
 
 ## 2. FIND SUPERSET OF CLINICAL FEATURES
 
-feat_list1 = {}
+feat_list = {}
 for tumor in tumor_list:
     filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
     filename = '{}.clin.merged.picked.txt'.format(tumor)
     if os.path.exists(filepath + filename):
-        tmp1 = pd.read_csv(filepath + filename, sep='\t')
-        tmp1.columns = [list(tmp1)[0]] + [f[:15] for f in list(tmp1)[1:]]
-        print(tmp1.columns.tolist())
-        tmp1         = tmp1.T.reset_index()
-        tmp1.columns = tmp1.iloc[0, 0:]
-        tmp1         = tmp1.iloc[1:, :].reset_index(drop=True)
-        feat_list1[tumor] = list(tmp1)[1:]
+        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
+        print(tmp.columns.tolist())
+        tmp         = tmp.T.reset_index()
+        tmp.columns = tmp.iloc[0, 0:]
+        tmp         = tmp.iloc[1:, :].reset_index(drop=True)
+        feat_list[tumor] = list(tmp)[1:]
         if tumor == 'ACC':
-            final_feat_list1 = feat_list1[tumor].copy()
-            sup_feat_list1   = feat_list1[tumor].copy()
+            final_feat_list = feat_list[tumor].copy()
+            sup_feat_list   = feat_list[tumor].copy()
         else:
-            final_feat_list1 = np.intersect1d(final_feat_list1, feat_list1[tumor])
-            sup_feat_list1  += feat_list1[tumor]
-sup_feat_list1 = np.unique(sup_feat_list1).tolist()
-print(sup_feat_list1)
+            final_feat_list = np.intersect1d(final_feat_list, feat_list[tumor])
+            sup_feat_list  += feat_list[tumor]
+sup_feat_list = np.unique(sup_feat_list).tolist()
+print(sup_feat_list)
 for tumor in tumor_list:
     filepath = '/home/lrodrigues/STAGE/DATAclinic'.format(tumor)
     filename = '{}.clin.merged.picked.txt'.format(tumor)
