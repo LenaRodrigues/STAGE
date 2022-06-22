@@ -160,7 +160,7 @@ label = label[label['Composite.Element.REF'].apply(lambda x: 'tcga' in x)].drop_
     Manually corrected these errors.
 '''
 
-label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death']
+'''label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death']
 label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status']
 label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'years_to_birth']
 
@@ -178,18 +178,12 @@ label.loc[label['days_to_death'].astype(float) <= 3*365, '3yr-mortality'] = 1.
 
 label['5yr-mortality'] = -1.
 label.loc[label['days_to_last_followup'].astype(float) >= 5*365, '5yr-mortality'] = 0.
-label.loc[label['days_to_death'].astype(float) <= 5*365, '5yr-mortality'] = 1.
+label.loc[label['days_to_death'].astype(float) <= 5*365, '5yr-mortality'] = 1.'''
 from sklearn.decomposition import PCA, SparsePCA, KernelPCA
 
-for view in ['RPPA', 'miRNAseq', 'Methylation', 'mRNAseq']:
+for view in ['RPPA']:
     print(view)
-    if view == 'mRNAseq':
-        df    = mRNAseq.copy(deep=True)
-    elif view == 'miRNAseq':
-        df    = miRNAseq.copy(deep=True)
-    elif view == 'Methylation':
-        df    = methylation.copy(deep=True)
-    elif view == 'RPPA':
+    if view == 'RPPA':
         df    = RPPA.copy(deep=True)
 
     z_dim = 100
