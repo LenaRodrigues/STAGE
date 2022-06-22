@@ -102,10 +102,11 @@ for tumor in tumor_list:
         tmp = pd.read_csv(filepath + filename, sep='\t')
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         print(list(tmp)[0])
-        
+        tmp = tmp.T.reset_index()
         tmp.columns = tmp.iloc[0, 0:]
         tmp         = tmp.iloc[1:, :].reset_index(drop=True)
         feat_list[tumor] = list(tmp)[1:]
+        print(feat_list[tumor])
         if tumor == 'ACC':
             final_feat_list = feat_list[tumor].copy()
             sup_feat_list   = feat_list[tumor].copy()
