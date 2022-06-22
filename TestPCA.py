@@ -194,7 +194,7 @@ for view in ['RPPA']:
     df_pca = pd.DataFrame(z, index=df['Hybridization REF']).reset_index()
     df_pca.to_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), index=False)
     view = 'RPPA'
-df_pca4  = pd.read_csv('./home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
+df_pca4  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
 idx_list_y = label.loc[label['1yr-mortality'] != -1, 'Hybridization REF']
 idx_list4 = df_pca4['Hybridization REF']
 idx_list     = np.intersect1d(idx_list_x, idx_list_y)
