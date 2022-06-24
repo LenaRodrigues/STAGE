@@ -4,6 +4,29 @@ import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA, SparsePCA, KernelPCA
 
+files = glob.glob("/home/lrodrigues/STAGE/DATAclinic/*.clin.merged.picked.txt")
+clinicallist = []
+for file in files:
+    file = pd.read_csv(file, sep="\t")
+    file.columns = [list(file)[0]] + [f[:15] for f in list(file)[1:]]
+    file = file.T.reset_index()
+    file.columns = file.iloc[0, 0:]
+    file = file.iloc[1:, :].reset_index(drop=True)
+    file.index = file['Hybridization REF']
+    file = file.fillna(-476)
+    i = 0
+    for x in ['vital_status']:
+        if x == 1:
+            if int(file['days_to_death'][i]) > 365:
+                file['vital_status'][i] = 0
+        else:
+            if int(file['days_to_last_followup'][i]) < 365:
+                file = file.drop(file.index[i], axis=0)
+    clinicallist.append(file)
+df = pd.concat(clinicallist, axis=0)
+df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
+
+
 mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmRNA.csv', low_memory=False)
 mRNAseq     = mRNAseq.rename(columns={'gene':'Hybridization REF'})
 mRNAseq['Hybridization REF'] = mRNAseq['Hybridization REF'].apply(lambda x: x.lower()[:-3])
