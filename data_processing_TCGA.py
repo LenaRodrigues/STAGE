@@ -246,7 +246,7 @@ final_df = final_df.drop_duplicates(subset=['gene']).reset_index(drop=True)
 final_df.to_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmRNA.csv', index=False)
 
 ###Clinical features: 
-files = glob.glob("/home/mpci20-2_admin/Bureau/Dataclinic/*.clin.merged.picked.txt")
+files = glob.glob("/home/lrodrigues/STAGE/DATAclinic/*.clin.merged.picked.txt")
 clinicallist = []
 for file in files:
     file = pd.read_csv(file, sep="\t")
@@ -267,7 +267,7 @@ for file in files:
                 file = file.drop(file.index[i], axis=0)
     clinicallist.append(file['vital_status'])
 df = pd.concat(clinicallist, axis=0)
-df.to_csv('/home/mpci20-2_admin/Bureau/Dataclinic/finalclinic.csv', index=False)
+df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
 
 mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv')
 mRNAseq     = mRNAseq.drop_duplicates(subset=['HYBRIDIZATION R']).reset_index(drop=True)
@@ -304,7 +304,7 @@ methylation = methylation[tmp_list[methylation.isna().sum(axis=0) == 0]]
 tmp_list    = np.asarray(list(miRNAseq))
 miRNAseq    = miRNAseq[tmp_list[miRNAseq.isna().sum(axis=0) == 0]]
 
-label = pd.read_csv('./FINAL/clinical_label.csv', header=1)
+label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1)
 label = label.sort_values(by='Hybridization REF').reset_index(drop=True)
 label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
 
