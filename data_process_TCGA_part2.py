@@ -61,8 +61,8 @@ tmp_list    = np.asarray(list(miRNAseq))
 miRNAseq    = miRNAseq[tmp_list[miRNAseq.isna().sum(axis=0) == 0]]
 
 label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1, low_memory=False)
-label = label.sort_values(by='Hybridization REF').reset_index(drop=True)
-label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
+label = label.sort_values(by='Hybridization').reset_index(drop=True)
+label = label[label['Hybridization'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization'], keep ='last').reset_index(drop=True)
 
 '''
     Some of the patients had shifted columns for some reason.
