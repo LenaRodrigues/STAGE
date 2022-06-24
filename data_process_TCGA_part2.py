@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA, SparsePCA, KernelPCA
 
-files = glob.glob("/home/lrodrigues/STAGE/DATAclinic/*.clin.merged.picked.txt")
+'''files = glob.glob("/home/lrodrigues/STAGE/DATAclinic/*.clin.merged.picked.txt")
 clinicallist = []
 for file in files:
     file = pd.read_csv(file, sep="\t")
@@ -24,7 +24,7 @@ for file in files:
                 file = file.drop(file.index[i], axis=0)
     clinicallist.append(file)
 df = pd.concat(clinicallist, axis=0)
-df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False, sep=' ')
+df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False, sep=' ')'''
 
 
 
@@ -61,7 +61,7 @@ methylation = methylation[tmp_list[methylation.isna().sum(axis=0) == 0]]
 tmp_list    = np.asarray(list(miRNAseq))
 miRNAseq    = miRNAseq[tmp_list[miRNAseq.isna().sum(axis=0) == 0]]
 
-label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1, on_bad_lines='skip', low_memory=False)
+label = pd.read_csv('/home/lrodrigues/STAGE/Finalclinic.csv', header=1, on_bad_lines='skip', low_memory=False)
 label = label.sort_values(by='Hybridization REF').reset_index(drop=True)
 label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
 
