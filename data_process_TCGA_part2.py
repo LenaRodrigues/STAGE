@@ -5,9 +5,7 @@ import pandas as pd
 from sklearn.decomposition import PCA, SparsePCA, KernelPCA
 
 mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmRNA.csv', low_memory=False)
-mRNAseq     = mRNAseq.rename(columns={'gene':'HYBRIDIZATION R'})
-mRNAseq     = mRNAseq.drop_duplicates(subset=['HYBRIDIZATION R']).reset_index(drop=True)
-mRNAseq     = mRNAseq.rename(columns={'HYBRIDIZATION REF':'Hybridization REF'})
+mRNAseq     = mRNAseq.rename(columns={'gene':'Hybridization REF'})
 mRNAseq['Hybridization REF'] = mRNAseq['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 
 RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv', low_memory=False)
