@@ -269,7 +269,7 @@ for file in files:
 df = pd.concat(clinicallist, axis=0)
 df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
 
-mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv', low_memory=False)
+mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmRNA.csv', low_memory=False)
 mRNAseq     = mRNAseq.drop_duplicates(subset=['HYBRIDIZATION R']).reset_index(drop=True)
 mRNAseq     = mRNAseq[mRNAseq['HYBRIDIZATION R'] != 'HYBRIDIZATION R'].reset_index(drop=True)
 mRNAseq     = mRNAseq.rename(columns={'HYBRIDIZATION R':'Hybridization REF'})
