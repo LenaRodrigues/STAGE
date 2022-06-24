@@ -50,7 +50,7 @@ for tumor in tumor_list:
     filename = '{}.rppa.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t',low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -74,7 +74,7 @@ for tumor in tumor_list:
     filename = '{}.rppa.txt'.format(tumor)
     
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -101,7 +101,7 @@ for tumor in tumor_list:
     filename = '{}.miRseq_RPKM_log2.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -124,7 +124,7 @@ for tumor in tumor_list:
     filename = '{}.miRseq_RPKM_log2.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -151,7 +151,7 @@ for tumor in tumor_list:
     filename = '{}.meth.by_mean.data.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
         tmp = tmp.iloc[1:, :].reset_index(drop=True)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
@@ -175,7 +175,7 @@ for tumor in tumor_list:
     filename = '{}.meth.by_mean.data.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -202,7 +202,7 @@ for tumor in tumor_list:
     filename = '{}.uncv2.mRNAseq_RSEM_normalized_log2.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -225,7 +225,7 @@ for tumor in tumor_list:
     filename = '{}.uncv2.mRNAseq_RSEM_normalized_log2.txt'.format(tumor)
 
     if os.path.exists(filepath + filename):
-        tmp = pd.read_csv(filepath + filename, sep='\t')
+        tmp = pd.read_csv(filepath + filename, sep='\t', low_memory=False)
 
         tmp.columns = [list(tmp)[0]] + [f[:15] for f in list(tmp)[1:]]
         tmp         = tmp.T.reset_index()
@@ -249,7 +249,7 @@ final_df.to_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmRNA.csv', index=False)
 files = glob.glob("/home/lrodrigues/STAGE/DATAclinic/*.clin.merged.picked.txt")
 clinicallist = []
 for file in files:
-    file = pd.read_csv(file, sep="\t")
+    file = pd.read_csv(file, sep="\t", low_memory=False)
     file.columns = [list(file)[0]] + [f[:15] for f in list(file)[1:]]
     file = file.T.reset_index()
     file.columns = file.iloc[0, 0:]
@@ -269,20 +269,20 @@ for file in files:
 df = pd.concat(clinicallist, axis=0)
 df.to_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', index=False)
 
-mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv')
+mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv', low_memory=False)
 mRNAseq     = mRNAseq.drop_duplicates(subset=['HYBRIDIZATION R']).reset_index(drop=True)
 mRNAseq     = mRNAseq[mRNAseq['HYBRIDIZATION R'] != 'HYBRIDIZATION R'].reset_index(drop=True)
 mRNAseq     = mRNAseq.rename(columns={'HYBRIDIZATION R':'Hybridization REF'})
 mRNAseq['Hybridization REF'] = mRNAseq['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 
-RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv')
+RPPA        = pd.read_csv('/home/lrodrigues/STAGE/datarppa/finalrppa.csv', low_memory=False)
 RPPA        = RPPA.rename(columns={'Composite.Element.REF':'Hybridization REF'})
 RPPA['Hybridization REF'] = RPPA['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 
-methylation = pd.read_csv('/home/lrodrigues/STAGE/DATAMethyl/finalmethyl.csv')
+methylation = pd.read_csv('/home/lrodrigues/STAGE/DATAMethyl/finalmethyl.csv',low_memory=False)
 methylation['Hybridization REF'] = methylation['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 
-miRNAseq    = pd.read_csv('/home/lrodrigues/STAGE/DATAmiRseq/finalmiRNAseq.csv')
+miRNAseq    = pd.read_csv('/home/lrodrigues/STAGE/DATAmiRseq/finalmiRNAseq.csv', low_memory=False)
 miRNAseq     = miRNAseq.rename(columns={'gene':'Hybridization REF'})
 miRNAseq['Hybridization REF'] = miRNAseq['Hybridization REF'].apply(lambda x: x.lower()[:-3])
 
@@ -304,7 +304,7 @@ methylation = methylation[tmp_list[methylation.isna().sum(axis=0) == 0]]
 tmp_list    = np.asarray(list(miRNAseq))
 miRNAseq    = miRNAseq[tmp_list[miRNAseq.isna().sum(axis=0) == 0]]
 
-label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1)
+label = pd.read_csv('/home/lrodrigues/STAGE/DATAclinic/finalclinic.csv', header=1, low_memory=False)
 label = label.sort_values(by='Hybridization REF').reset_index(drop=True)
 label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
 
@@ -397,16 +397,16 @@ for view in ['RPPA', 'miRNAseq', 'Methylation', 'mRNAseq']:
 #     df_pca.to_csv('/home/lrodrigues/STAGE/{}_spca.csv'.format(view), index=False)
 
 view = 'mRNAseq'
-df_pca1  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
+df_pca1  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), low_memory=False)
 
 view = 'Methylation'
-df_pca2  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
+df_pca2  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), low_memory=False)
 
 view = 'miRNAseq'
-df_pca3  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
+df_pca3  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), low_memory=False)
 
 view = 'RPPA'
-df_pca4  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view))
+df_pca4  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), low_memory=False)
 
 
 idx_list_y = label.loc[label['1yr-mortality'] != -1, 'Hybridization REF']
