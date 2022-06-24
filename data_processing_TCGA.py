@@ -429,7 +429,7 @@ df4 = pd.merge(df, df_pca4, how='left', on='Hybridization REF')
 dfy = pd.merge(df, label[['Hybridization REF','1yr-mortality']], how='left', on='Hybridization REF')
 
 np.savez(
-    './FINAL/multi_omics_1yr_mortality.npz',
+    '/home/lrodrigues/STAGE/multi_omics_1yr_mortality.npz',
     mRNAseq     = np.asarray(df1.iloc[:, 1:]),
     Methylation = np.asarray(df1.iloc[:, 1:]),
     miRNAseq    = np.asarray(df1.iloc[:, 1:]),
