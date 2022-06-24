@@ -1,5 +1,5 @@
 import os
-
+import glob
 import numpy as np
 import pandas as pd
 
@@ -243,7 +243,31 @@ for tumor in tumor_list:
             final_df = pd.concat([final_df, tmp_], axis=0)
             
 final_df = final_df.drop_duplicates(subset=['gene']).reset_index(drop=True)
-final_df.to_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv', index=False)
+final_df.to_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmRNA.csv', index=False)
+
+###Clinical features: 
+files = glob.glob("/home/mpci20-2_admin/Bureau/Dataclinic/*.clin.merged.picked.txt")
+clinicallist = []
+for file in files:
+    file = pd.read_csv(file, sep="\t")
+    file.columns = [list(file)[0]] + [f[:15] for f in list(file)[1:]]
+    file = file.T.reset_index()
+    file.columns = file.iloc[0, 0:]
+    file = file.iloc[1:, :].reset_index(drop=True)
+    file.index = file['Hybridization REF']
+    file = file.fillna(-476)
+    i = 0
+    for x in ['vital_status']:
+        a = file['Hybridization REF'][i]
+        if x == 1:
+            if int(file['days_to_death'][i]) > 365:
+                file['vital_status'][i] = 0
+        else:
+            if int(file['days_to_last_followup'][i]) < 365:
+                file = file.drop(file.index[i], axis=0)
+    clinicallist.append(file['vital_status'])
+df = pd.concat(clinicallist, axis=0)
+df.to_csv('/home/mpci20-2_admin/Bureau/Dataclinic/finalclinic.csv', index=False)
 
 mRNAseq     = pd.read_csv('/home/lrodrigues/STAGE/DATAmRseq/finalmiRNA.csv')
 mRNAseq     = mRNAseq.drop_duplicates(subset=['HYBRIDIZATION R']).reset_index(drop=True)
