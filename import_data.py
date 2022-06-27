@@ -24,7 +24,7 @@ def import_incomplete_handwritten():
 
 
 def import_dataset_TCGA(year=1):
-    filename = '/home/mpci20-2_admin/Bureau/multi_omics_{}yr_mortality.npz'.format(int(year))
+    filename = '/home/lrodrigues/STAGE/multi_omics_{}yr_mortality.npz'.format(int(year))
     npz      = np.load(filename)
 
     Mask  = npz['m']
