@@ -61,7 +61,7 @@ methylation = methylation[tmp_list[methylation.isna().sum(axis=0) == 0]]
 tmp_list    = np.asarray(list(miRNAseq))
 miRNAseq    = miRNAseq[tmp_list[miRNAseq.isna().sum(axis=0) == 0]]
 
-label = pd.read_csv('/home/lrodrigues/STAGE/Finalfinalclinic.csv ', header=1, on_bad_lines='skip', low_memory=False)
+label = pd.read_csv('/home/lrodrigues/STAGE/Finalfinalclinic.csv', header=1, on_bad_lines='skip', low_memory=False)
 label = label.rename(index ={'HRF': 'Hybridization REF'})
 label = label.sort_values(['Hybridization REF', 'Hybridization REF'], axis=0).reset_index(drop=True)
 label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
