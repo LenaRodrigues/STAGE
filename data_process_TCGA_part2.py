@@ -86,7 +86,7 @@ label['5yr-mortality'] = -1.
 label.loc[label['days_to_last_followup'].astype(float) >= 5*365, '5yr-mortality'] = 0.
 label.loc[label['days_to_death'].astype(float) <= 5*365, '5yr-mortality'] = 1. '''
 
-for view in ['RPPA', 'miRNAseq', 'Methylation', 'mRNAseq']:
+'''for view in ['RPPA', 'miRNAseq', 'Methylation', 'mRNAseq']:
     print(view)
     if view == 'mRNAseq':
         df    = mRNAseq.copy(deep=True)
@@ -103,7 +103,7 @@ for view in ['RPPA', 'miRNAseq', 'Methylation', 'mRNAseq']:
     z     =  pca.fit_transform(np.asarray(df.iloc[:, 1:]))
 
     df_pca = pd.DataFrame(z, index=df['Hybridization REF']).reset_index()
-    df_pca.to_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), index=False)
+    df_pca.to_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), index=False)'''
     
 # from sklearn.decomposition import PCA, SparsePCA, KernelPCA
 
@@ -160,7 +160,7 @@ view = 'RPPA'
 df_pca4  = pd.read_csv('/home/lrodrigues/STAGE/{}_kpca.csv'.format(view), low_memory=False)
 
 
-idx_list_y = label.loc[label['1yr-mortality'] != -1, 'Hybridization REF']
+idx_list_y = label.loc[label['1yr-mortality'] != -1, ['Hybridization REF']]
 
 idx_list1 = df_pca1['Hybridization REF']
 idx_list2 = df_pca2['Hybridization REF']
