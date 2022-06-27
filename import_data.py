@@ -24,12 +24,12 @@ def import_incomplete_handwritten():
 
 
 def import_dataset_TCGA(year=1):
-    filename = '/home/lrodrigues/STAGE/multi_omics_{}yr_mortality.npz'.format(int(year))
-    npz      = np.load(filename)
-
-    Mask  = npz['m']
-    M     = np.shape(Mask)[1]
-
+    filename = '/home/mpci20-2_admin/Bureau/multi_omics_1yr_mortality/{}.npy'.format(int(year))
+    npz = np.load(filename)
+    data = [Methylation, miRNA, mRNA, RPPA]
+    for m in data:
+        Mask = npz['m']
+        M = np.shape(Mask)[1]
     X_set = {}
     for m in range(M):
         tmp = npz['x{}'.format(m+1)]
