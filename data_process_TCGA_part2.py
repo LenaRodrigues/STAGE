@@ -61,14 +61,14 @@ methylation = methylation[tmp_list[methylation.isna().sum(axis=0) == 0]]
 tmp_list    = np.asarray(list(miRNAseq))
 miRNAseq    = miRNAseq[tmp_list[miRNAseq.isna().sum(axis=0) == 0]]
 
-label = pd.read_csv('/home/lrodrigues/STAGE/Finalfinalclinic.csv', header=1, on_bad_lines='skip', low_memory=False)
-label = label.rename(index ={'HRF': 'Hybridization REF'})
+label = pd.read_csv('/home/lrodrigues/STAGE/Finalclinic2.csv', header=1, on_bad_lines='skip', low_memory=False)
+'''label = label.rename(index ={'HRF': 'Hybridization REF'})
 label = label.sort_values(['Hybridization REF', 'Hybridization REF'], axis=0).reset_index(drop=True)
 label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
 
 '''
-    Some of the patients had shifted columns for some reason.
-    Manually corrected these errors.
+    '''Some of the patients had shifted columns for some reason.
+    Manually corrected these errors.'''
 '''
 
 label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death']
@@ -89,7 +89,7 @@ label.loc[label['days_to_death'].astype(float) <= 3*365, '3yr-mortality'] = 1.
 
 label['5yr-mortality'] = -1.
 label.loc[label['days_to_last_followup'].astype(float) >= 5*365, '5yr-mortality'] = 0.
-label.loc[label['days_to_death'].astype(float) <= 5*365, '5yr-mortality'] = 1.
+label.loc[label['days_to_death'].astype(float) <= 5*365, '5yr-mortality'] = 1. '''
 
 for view in ['RPPA', 'miRNAseq', 'Methylation', 'mRNAseq']:
     print(view)
