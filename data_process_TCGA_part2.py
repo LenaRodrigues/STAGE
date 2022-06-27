@@ -66,11 +66,6 @@ label = pd.read_csv('/home/lrodrigues/STAGE/Finalclinic2.csv', header=1, on_bad_
 label = label.sort_values(['Hybridization REF', 'Hybridization REF'], axis=0).reset_index(drop=True)
 label = label[label['Hybridization REF'].apply(lambda x: 'tcga' in x)].drop_duplicates(subset=['Hybridization REF'], keep ='last').reset_index(drop=True)
 
-'''
-    '''Some of the patients had shifted columns for some reason.
-    Manually corrected these errors.'''
-'''
-
 label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_last_followup'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death']
 label.loc[label['days_to_last_followup'] == 'endometrial', 'days_to_death'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status']
 label.loc[label['days_to_last_followup'] == 'endometrial', 'vital_status'] = label.loc[label['days_to_last_followup'] == 'endometrial', 'years_to_birth']
