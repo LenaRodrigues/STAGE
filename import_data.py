@@ -27,7 +27,7 @@ def import_dataset_TCGA(year=1):
     filepath = '/home/lrodrigues/STAGE/'.format(int(year))
     data = ['Methylation','miRNA', 'mRNA', 'RPPA']
     for m in data:
-        filename = 'm.npy'.format(int(year))
+        filename = '{}.npy'.format(int(year))
         npz = np.load(filepath + filename )
         Mask = npz['m']
         M = np.shape(Mask)[1]
