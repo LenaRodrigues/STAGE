@@ -24,13 +24,15 @@ def import_incomplete_handwritten():
 
 
 def import_dataset_TCGA(year=1):
-    filename = '/home/lrodrigues/STAGE/'.format(int(year))
+    filepath = '/home/lrodrigues/STAGE/'.format(int(year))
     data = ['Methylation','miRNA', 'mRNA', 'RPPA']
     for m in data:
-        npz = np.load(filename + m.npy)
+        filename = 'm.npy'.format(int(year))
+        npz = np.load(filepath + filename )
         Mask = npz['m']
         M = np.shape(Mask)[1]
     X_set = {}
+    
     for m in range(M):
         tmp = npz['x{}'.format(m+1)]
         tmp[np.isnan(tmp[:, 0]), :] = np.nanmean(tmp, axis=0)
