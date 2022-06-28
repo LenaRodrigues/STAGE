@@ -120,10 +120,10 @@ class DeepIMV_AISTATS:
         self.name             = name
        
         # INPUT/OUTPUT DIMENSIONS
-        self.M                = ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']
+        self.M                = len(input_dims['x_dim_set'])
         
         self.x_dim_set = {}
-        for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+        for m in range(self.M):
             self.x_dim_set[m] = input_dims['x_dim_set'][m]
             
         self.y_dim            = input_dims['y_dim']
@@ -161,7 +161,7 @@ class DeepIMV_AISTATS:
                        
             ### INPUT/OUTPUT                   
             self.x_set          = {}
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 self.x_set[m]   = tf.placeholder(tf.float32, [None, self.x_dim_set[m]], 'input_{}'.format(m))
             
             self.mask           = tf.placeholder(tf.float32, [None, self.M], name='mask')            
@@ -179,7 +179,7 @@ class DeepIMV_AISTATS:
             ### PRIOR
             prior_z  = ds.Normal(0.0, 1.0) #PoE Prior - q(z)
             prior_z_set = {}
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 prior_z_set[m] = ds.Normal(0.0, 1.0) #View-Specific Prior - q(z_{m})
                         
             ### STOCHASTIC ENCODER
@@ -188,7 +188,7 @@ class DeepIMV_AISTATS:
             self.mu_z_set     = {}
             self.logvar_z_set = {}
             
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 with tf.variable_scope('encoder{}'.format(m+1)):
                     self.h_set[m]      = stochastic_encoder(
                         x_=self.x_set[m], o_dim_=2*self.z_dim, 
@@ -206,7 +206,7 @@ class DeepIMV_AISTATS:
 
             qz_set     = {}
             self.z_set = {}
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 qz_set[m]      = ds.Normal(self.mu_z_set[m], tf.sqrt(tf.exp(self.logvar_z_set[m])))
                 self.z_set[m]  = qz_set[m].sample()
 
@@ -230,7 +230,7 @@ class DeepIMV_AISTATS:
                                     
             ### PREDICTOR 
             self.y_hat_set = {}
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 with tf.variable_scope('predictor_set{}'.format(m)):
                     self.y_hat_set[m] = predictor(
                         x_=self.z_set[m], o_dim_=self.y_dim, o_type_=self.y_type, 
@@ -247,7 +247,7 @@ class DeepIMV_AISTATS:
         
             ### CONSITENCY LOSS
             self.LOSS_CONSISTENCY = 0.
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 self.LOSS_CONSISTENCY += 1./self.M * div(
                     tf.reduce_sum(self.mask[:, m] * tf.reduce_sum(ds.kl_divergence(qz, qz_set[m]), axis=-1)),
                     tf.reduce_sum(self.mask[:, m])
@@ -263,7 +263,7 @@ class DeepIMV_AISTATS:
                                     
             self.LOSS_Ps_all  = []
             self.LOSS_KLs_all = []
-            for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+            for m in range(self.M):
                 tmp_p              = loss_y(self.y, self.y_hat_set[m], self.y_type)
                 tmp_kl             = tf.reduce_sum(ds.kl_divergence(qz_set[m], prior_z_set[m]), axis=-1)
         
@@ -354,8 +354,6 @@ class DeepIMV_AISTATS:
   
     def make_feed_dict(self, x_set_):
         feed_dict_ = {}
-        for m in range(len(self.x_set)):
+        for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
             feed_dict_[self.x_set[m]] = x_set_[m]           
         return feed_dict_
-
-    
