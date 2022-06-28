@@ -21,6 +21,7 @@ model_name = 'DeepIMV_AISTATS'
 
 M = len(X_set_comp)
 print(M)
+print(X_set_comp)
 SEED = 1234
 OUTITERATION = 5
 
