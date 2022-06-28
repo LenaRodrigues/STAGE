@@ -177,7 +177,7 @@ df1 = pd.merge(df, df_pca1, how='left', on='Hybridization REF')
 df2 = pd.merge(df, df_pca2, how='left', on='Hybridization REF')
 df3 = pd.merge(df, df_pca3, how='left', on='Hybridization REF')
 df4 = pd.merge(df, df_pca4, how='left', on='Hybridization REF')
-dfy = pd.merge(df, label[['Hybridization REF','1yr-mortality']], how='left', on='Hybridization REF')
+dfy = pd.merge(df, label['Hybridization REF'], how='left', on='Hybridization REF')
 
 np.savez(
     '/home/lrodrigues/STAGE/multi_omics_1yr_mortality.npz',
