@@ -182,8 +182,8 @@ dfy = pd.merge(df, label[['Hybridization REF','1yr-mortality']], how='left', on=
 np.savez(
     '/home/lrodrigues/STAGE/multi_omics_1yr_mortality.npz',
     mRNAseq     = np.asarray(df1.iloc[:, 1:]),
-    Methylation = np.asarray(df1.iloc[:, 1:]),
-    miRNAseq    = np.asarray(df1.iloc[:, 1:]),
-    RPPA        = np.asarray(df1.iloc[:, 1:]),
-    label       = np.asarray(df1.iloc[:, 1:])
+    Methylation = np.asarray(df2.iloc[:, 1:]),
+    miRNAseq    = np.asarray(df3.iloc[:, 1:]),
+    RPPA        = np.asarray(df4.iloc[:, 1:]),
+    label       = np.asarray(dfy.iloc[:, 1:])
 )
