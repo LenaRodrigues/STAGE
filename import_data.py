@@ -42,7 +42,7 @@ def import_dataset_TCGA(year=1):
         X_set[m] = tmp
     X_set_incomp = {}
     X_set_comp = {}
-    for m in range(M):
+    for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
         X_set_comp[m] = X_set[m][np.sum(Mask, axis=1) == 4]
         X_set_incomp[m] = X_set[m][np.sum(Mask, axis=1) != 4]
     Y_comp = Y[np.sum(Mask, axis=1) == 4]
