@@ -354,6 +354,6 @@ class DeepIMV_AISTATS:
   
     def make_feed_dict(self, x_set_):
         feed_dict_ = {}
-        for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+        for m in range(len(self.x_set)):
             feed_dict_[self.x_set[m]] = x_set_[m]           
         return feed_dict_
