@@ -8,7 +8,7 @@ def f_get_minibatch_set(mb_size_, x_set_, y_, m_):
     idx = random.sample(idx, mb_size_)
     
     x_set_mb = {}
-    for m in range(len(x_set_)):
+    for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
         x_set_mb[m] = x_set_[m][idx].astype(float)    
     y_mb   = y_[idx].astype(float)
     m_mb  = m_[idx].astype(float)
