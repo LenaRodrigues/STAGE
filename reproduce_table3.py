@@ -20,7 +20,7 @@ MODE = 'incomplete'
 model_name = 'DeepIMV_AISTATS'
 
 M = len(X_set_comp)
-
+print(M)
 SEED = 1234
 OUTITERATION = 5
 
