@@ -77,7 +77,7 @@ steps_per_batch = int(np.shape(tr_M)[0]/mb_size)
 steps_per_batch = 500
 
 print(len(tr_X_set))
-x_dim_set = [tr_X_set[m].shape[1] for m in range(len(tr_X_set))]
+x_dim_set = [tr_X_set[m].shape[1] for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']]
 y_dim = np.shape(tr_Y_onehot)[1]
 y_type = 'binary'
 z_dim = 100
