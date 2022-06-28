@@ -120,7 +120,7 @@ class DeepIMV_AISTATS:
         self.name             = name
        
         # INPUT/OUTPUT DIMENSIONS
-        self.M                = 4
+        self.M                = ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']
         
         self.x_dim_set = {}
         for m in range(self.M):
