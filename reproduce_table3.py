@@ -64,8 +64,6 @@ if not os.path.exists(save_path + 'itr{}/'.format(out_itr)):
 
 (5850, 4)
 
-Hyper-parameters
-
 # training coefficients
 alpha = 1.0
 beta = 0.01  # IB coefficient
