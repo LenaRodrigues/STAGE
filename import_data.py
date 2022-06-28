@@ -52,9 +52,9 @@ def import_dataset_TCGA(year=1):
     Y_onehot_incomp = np.zeros([np.shape(Y_incomp)[0], 2])
     Y_onehot_comp = np.zeros([np.shape(Y_comp)[0], 2])
 
-    Y_onehot_incomp[Y_incomp == 0, 0] = 1
-    Y_onehot_incomp[Y_incomp == 1, 1] = 1
-    Y_onehot_comp[Y_comp == 0, 0] = 1
-    Y_onehot_comp[Y_comp == 1, 1] = 1
+    Y_onehot_incomp[Y_incomp == 0] = 1
+    Y_onehot_incomp[Y_incomp == 1] = 1
+    Y_onehot_comp[Y_comp == 0] = 1
+    Y_onehot_comp[Y_comp == 1] = 1
 
     return X_set_comp, Y_onehot_comp, Mask_comp, X_set_incomp, Y_onehot_incomp, Mask_incomp
