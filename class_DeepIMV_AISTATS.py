@@ -121,7 +121,7 @@ class DeepIMV_AISTATS:
         self.name             = name
        
         # INPUT/OUTPUT DIMENSIONS
-        self.M                = len(input_dims['x_dim_set'])
+        self.M                = 4
         
         self.x_dim_set = {}
         for m in range(self.M):
