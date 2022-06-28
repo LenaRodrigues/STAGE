@@ -136,7 +136,8 @@ stop_flag = 0
 for itr in range(ITERATION):
     x_mb_set, y_mb, m_mb = f_get_minibatch_set(
         mb_size, tr_X_set, tr_Y_onehot, tr_M)
-
+    print(x_mb_set)
+    print(len(x_mb_set))
     _, Lt, Lp, Lkl, Lps, Lkls, Lc = model.train(
         x_mb_set, y_mb, m_mb, alpha, beta, lr_rate, k_prob)
 
