@@ -31,7 +31,7 @@ RESULTS_AUPRC_RAND = np.zeros([4, OUTITERATION+2])
 out_itr = 1
 
 tr_X_set, te_X_set, va_X_set = {}, {}, {}
-for m in range(M):
+for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
     tr_X_set[m], te_X_set[m] = train_test_split(
         X_set_comp[m], test_size=0.2, random_state=SEED + out_itr)
     tr_X_set[m], va_X_set[m] = train_test_split(
@@ -43,7 +43,7 @@ tr_Y_onehot, va_Y_onehot, tr_M, va_M = train_test_split(
     tr_Y_onehot, tr_M, test_size=0.2, random_state=SEED + out_itr)
 
 if MODE == 'incomplete':
-    for m in range(M):
+    for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
         tr_X_set[m] = np.concatenate([tr_X_set[m], X_set_incomp[m]], axis=0)
 
     tr_Y_onehot = np.concatenate([tr_Y_onehot, Y_onehot_incomp], axis=0)
