@@ -35,10 +35,11 @@ for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
         X_set_comp[m], test_size=0.2, random_state=SEED + out_itr)
     tr_X_set[m], va_X_set[m] = train_test_split(
         tr_X_set[m], test_size=0.2, random_state=SEED + out_itr)
-print(tr_Y_onehot)
-print(tr_M)
+
 tr_Y_onehot, te_Y_onehot, tr_M, te_M = train_test_split(
     Y_onehot_comp, Mask_comp, test_size=0.2, random_state=SEED + out_itr)
+print(tr_Y_onehot)
+print(tr_M)
 tr_Y_onehot, va_Y_onehot, tr_M, va_M = train_test_split(
     tr_Y_onehot, tr_M, test_size=0.2, random_state=SEED + out_itr)
 
