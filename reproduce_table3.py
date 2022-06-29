@@ -136,9 +136,7 @@ stop_flag = 0
 for itr in range(ITERATION):
     x_mb_set, y_mb, m_mb = f_get_minibatch_set(
         mb_size, tr_X_set, tr_Y_onehot, tr_M)
-    print(x_mb_set)
-    print(len(x_mb_set))
-    print(x_mb_set.keys())
+    
     x_mb_set[0]=x_mb_set.pop('Methylation')
     x_mb_set[1]=x_mb_set.pop('miRNAseq')
     x_mb_set[2]=x_mb_set.pop('mRNAseq')
@@ -156,7 +154,7 @@ for itr in range(ITERATION):
    
     x_mb_set, y_mb, m_mb = f_get_minibatch_set(
         min(np.shape(va_M)[0], mb_size), va_X_set, va_Y_onehot, va_M)
-    print(x_mb_set.keys())
+    
     x_mb_set[0]=x_mb_set.pop('Methylation')
     x_mb_set[1]=x_mb_set.pop('miRNAseq')
     x_mb_set[2]=x_mb_set.pop('mRNAseq')
@@ -171,17 +169,18 @@ for itr in range(ITERATION):
     va_avg_Lps += Lps/STEPSIZE
     va_avg_Lkls += Lkls/STEPSIZE
     va_avg_Lc += Lc/STEPSIZE
-    print("okay1")
+    
     if (itr+1) % STEPSIZE == 0:
-        print("okay2")
+        
         va_X_set[0]=va_X_set.pop('Methylation')
         va_X_set[1]=va_X_set.pop('miRNAseq')
         va_X_set[2]=va_X_set.pop('mRNAseq')
         va_X_set[3]=va_X_set.pop('RPPA')
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
         print("okay3")
+        print(va_Y_onehot)
 #         score =
-
+        
         print("{:05d}: TRAIN| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} | VALID| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} score={}".format(
             itr+1, tr_avg_Lt, tr_avg_Lp, tr_avg_Lkl, tr_avg_Lps, tr_avg_Lkls, tr_avg_Lc,
             va_avg_Lt, va_avg_Lp, va_avg_Lkl, va_avg_Lps, va_avg_Lkls, va_avg_Lc, evaluate(va_Y_onehot, np.mean(y_preds, axis=0), y_type))
