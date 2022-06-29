@@ -153,9 +153,10 @@ for itr in range(ITERATION):
     tr_avg_Lps += Lps/STEPSIZE
     tr_avg_Lkls += Lkls/STEPSIZE
     tr_avg_Lc += Lc/STEPSIZE
-    print("OKAY")
+   
     x_mb_set, y_mb, m_mb = f_get_minibatch_set(
         min(np.shape(va_M)[0], mb_size), va_X_set, va_Y_onehot, va_M)
+    print(x_mb_set.keys())
     Lt, Lp, Lkl, Lps, Lkls, Lc, _, _ = model.get_loss(
         x_mb_set, y_mb, m_mb, alpha, beta)
 
