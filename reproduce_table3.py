@@ -175,6 +175,9 @@ for itr in range(ITERATION):
     if (itr+1) % STEPSIZE == 0:
         print("okay2")
         va_X_set[0]=va_X_set.pop('Methylation')
+        va_X_set[1]=va_X_set.pop('miRNAseq')
+        va_X_set[2]=va_X_set.pop('mRNAseq')
+        va_X_set[3]=va_X_set.pop('RPPA)
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
         print("okay3")
 #         score =
