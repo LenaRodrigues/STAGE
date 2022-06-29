@@ -171,10 +171,11 @@ for itr in range(ITERATION):
     va_avg_Lps += Lps/STEPSIZE
     va_avg_Lkls += Lkls/STEPSIZE
     va_avg_Lc += Lc/STEPSIZE
-    print("okay", va_X_set.keys())
+    print("okay1")
     if (itr+1) % STEPSIZE == 0:
+        print("okay2)
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
-
+        print("okay3")
 #         score =
 
         print("{:05d}: TRAIN| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} | VALID| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} score={}".format(
