@@ -174,6 +174,7 @@ for itr in range(ITERATION):
     print("okay1")
     if (itr+1) % STEPSIZE == 0:
         print("okay2")
+        va_X_set[0]=va_X_set.pop('Methylation')
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
         print("okay3")
 #         score =
