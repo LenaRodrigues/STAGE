@@ -20,8 +20,7 @@ MODE = 'incomplete'
 model_name = 'DeepIMV_AISTATS'
 
 M = len(X_set_comp)
-print(M)
-print(X_set_comp)
+
 SEED = 1234
 OUTITERATION = 5
 
@@ -76,7 +75,6 @@ mb_size = 32
 steps_per_batch = int(np.shape(tr_M)[0]/mb_size)
 steps_per_batch = 500
 
-print(len(tr_X_set))
 x_dim_set = [tr_X_set[m].shape[1] for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']]
 y_dim = np.shape(tr_Y_onehot)[1]
 y_type = 'binary'
@@ -159,7 +157,7 @@ for itr in range(ITERATION):
     x_mb_set[1]=x_mb_set.pop('miRNAseq')
     x_mb_set[2]=x_mb_set.pop('mRNAseq')
     x_mb_set[3]=x_mb_set.pop('RPPA')
-    print(x_mb_set.keys())
+    
     Lt, Lp, Lkl, Lps, Lkls, Lc, _, _ = model.get_loss(
         x_mb_set, y_mb, m_mb, alpha, beta)
 
@@ -177,8 +175,7 @@ for itr in range(ITERATION):
         va_X_set[2]=va_X_set.pop('mRNAseq')
         va_X_set[3]=va_X_set.pop('RPPA')
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
-        print("okay3")
-        print(va_Y_onehot)
+      
 #         score =
         
         print("{:05d}: TRAIN| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} | VALID| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} score={}".format(
