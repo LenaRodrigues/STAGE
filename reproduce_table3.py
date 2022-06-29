@@ -173,7 +173,7 @@ for itr in range(ITERATION):
     va_avg_Lc += Lc/STEPSIZE
     print("okay1")
     if (itr+1) % STEPSIZE == 0:
-        print("okay2)
+        print("okay2")
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
         print("okay3")
 #         score =
