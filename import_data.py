@@ -30,19 +30,19 @@ def import_dataset_TCGA(year=1):
     Y = npz['label']
     Mask = np.zeros((Y.shape[0], 4))
     i = 0
-    for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+    for m in range(0, 4):
         vec = np.any(np.isnan(npz[m]), axis=1)
         Mask[:, i] = vec
         i = i+1
 
     X_set = {}
-    for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
-        tmp = npz['Methylation'.format(1)]
+    for m in range(0,4):
+        tmp = npz['m'.format(1)]
         tmp[np.isnan(tmp[:, 0]), :] = np.nanmean(tmp, axis=0)
         X_set[m] = tmp
     X_set_incomp = {}
     X_set_comp = {}
-    for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
+    for m in range(0,4):
         X_set_comp[m] = X_set[m][np.sum(Mask, axis=1) == 4]
         X_set_incomp[m] = X_set[m][np.sum(Mask, axis=1) != 4]
     Y_comp = Y[np.sum(Mask, axis=1) == 4]
