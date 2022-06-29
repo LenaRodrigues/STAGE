@@ -139,7 +139,7 @@ for itr in range(ITERATION):
     x_mb_set[1]=x_mb_set.pop('miRNAseq')
     x_mb_set[2]=x_mb_set.pop('mRNAseq')
     x_mb_set[3]=x_mb_set.pop('RPPA')
-    print(x_mb_set.keys())
+    
     _, Lt, Lp, Lkl, Lps, Lkls, Lc = model.train(
         x_mb_set, y_mb, m_mb, alpha, beta, lr_rate, k_prob)
 
