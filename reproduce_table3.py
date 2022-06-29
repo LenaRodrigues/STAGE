@@ -171,7 +171,9 @@ for itr in range(ITERATION):
     va_avg_Lps += Lps/STEPSIZE
     va_avg_Lkls += Lkls/STEPSIZE
     va_avg_Lc += Lc/STEPSIZE
-
+    
+    print(va_X_set.keys())
+    print(va_M.keys())
     if (itr+1) % STEPSIZE == 0:
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
 
