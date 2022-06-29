@@ -157,6 +157,11 @@ for itr in range(ITERATION):
     x_mb_set, y_mb, m_mb = f_get_minibatch_set(
         min(np.shape(va_M)[0], mb_size), va_X_set, va_Y_onehot, va_M)
     print(x_mb_set.keys())
+    x_mb_set[0]=x_mb_set.pop('Methylation')
+    x_mb_set[1]=x_mb_set.pop('miRNAseq')
+    x_mb_set[2]=x_mb_set.pop('mRNAseq')
+    x_mb_set[3]=x_mb_set.pop('RPPA')
+    print(x_mb_set.keys())
     Lt, Lp, Lkl, Lps, Lkls, Lc, _, _ = model.get_loss(
         x_mb_set, y_mb, m_mb, alpha, beta)
 
