@@ -172,7 +172,7 @@ for itr in range(ITERATION):
     va_avg_Lkls += Lkls/STEPSIZE
     va_avg_Lc += Lc/STEPSIZE
     
-    
+     va_X_set[0]=va_X_set.pop('Methylation')
     if (itr+1) % STEPSIZE == 0:
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
 
