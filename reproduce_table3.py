@@ -167,7 +167,7 @@ for itr in range(ITERATION):
     va_avg_Lps += Lps/STEPSIZE
     va_avg_Lkls += Lkls/STEPSIZE
     va_avg_Lc += Lc/STEPSIZE
-print('B=', va_Y_onehot)    
+    print('B=', va_Y_onehot)    
     if (itr+1) % STEPSIZE == 0:
         
         va_X_set[0]=va_X_set.pop('Methylation')
