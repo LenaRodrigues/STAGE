@@ -63,7 +63,6 @@ if not os.path.exists(save_path + 'itr{}/'.format(out_itr)):
     os.makedirs(save_path + 'itr{}/'.format(out_itr))
 
 (5850, 4)
-print('B=', va_Y_onehot)
 # training coefficients
 alpha = 1.0
 beta = 0.01  # IB coefficient
@@ -168,7 +167,7 @@ for itr in range(ITERATION):
     va_avg_Lps += Lps/STEPSIZE
     va_avg_Lkls += Lkls/STEPSIZE
     va_avg_Lc += Lc/STEPSIZE
-    
+print('B=', va_Y_onehot)    
     if (itr+1) % STEPSIZE == 0:
         
         va_X_set[0]=va_X_set.pop('Methylation')
