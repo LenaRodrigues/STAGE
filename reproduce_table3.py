@@ -42,7 +42,7 @@ tr_Y_onehot, te_Y_onehot, tr_M, te_M = train_test_split(
 tr_Y_onehot, va_Y_onehot, tr_M, va_M = train_test_split(
     tr_Y_onehot, tr_M, test_size=0.2, random_state=SEED + out_itr)
 
-print('B=', va_Y_onehot)
+print(va_Y_onehot)
 
 if MODE == 'incomplete':
     for m in ['Methylation', 'miRNAseq', 'mRNAseq', 'RPPA']:
