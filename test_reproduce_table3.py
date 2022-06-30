@@ -150,10 +150,10 @@ for itr in range(ITERATION):
     tr_avg_Lps += Lps/STEPSIZE
     tr_avg_Lkls += Lkls/STEPSIZE
     tr_avg_Lc += Lc/STEPSIZE
-   x_mb_set['Methylation']=x_mb_set.pop('0')
-    x_mb_set['miRNAseq']=x_mb_set.pop('1')
-    x_mb_set['mRNAseq']=x_mb_set.pop('2')
-    x_mb_set['RPPA']=x_mb_set.pop('3')
+    x_mb_set['Methylation']=x_mb_set.pop(0)
+    x_mb_set['miRNAseq']=x_mb_set.pop(1)
+    x_mb_set['mRNAseq']=x_mb_set.pop(2)
+    x_mb_set['RPPA']=x_mb_set.pop(3)
     x_mb_set, y_mb, m_mb = f_get_minibatch_set(
         min(np.shape(va_M)[0], mb_size), va_X_set, va_Y_onehot, va_M)
     
