@@ -55,7 +55,7 @@ elif MODE == 'complete':
 else:
     raise ValueError('WRONG MODE!!!')
 
-print('B=', va_Y_onehot)
+
 save_path = '{}/M{}_{}/{}/'.format(DATASET_PATH, M, MODE, model_name)
 
 
@@ -63,7 +63,7 @@ if not os.path.exists(save_path + 'itr{}/'.format(out_itr)):
     os.makedirs(save_path + 'itr{}/'.format(out_itr))
 
 (5850, 4)
-
+print('B=', va_Y_onehot)
 # training coefficients
 alpha = 1.0
 beta = 0.01  # IB coefficient
