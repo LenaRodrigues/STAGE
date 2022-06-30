@@ -177,7 +177,7 @@ for itr in range(ITERATION):
         va_X_set[2]=va_X_set.pop('mRNAseq')
         va_X_set[3]=va_X_set.pop('RPPA')
         y_pred, y_preds = model.predict_ys(va_X_set, va_M)
-      
+        print('A=', va_Y_onehot)
 #         score =
         
         print("{:05d}: TRAIN| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} | VALID| Lt={:.3f} Lp={:.3f} Lkl={:.3f} Lps={:.3f} Lkls={:.3f} Lc={:.3f} score={}".format(
